@@ -1,0 +1,47 @@
+<div class="fondoGrande">
+    <div class="container fondo">
+        <h2>Inscripción</h2>
+        <form [formGroup]='registroForm' (ngSubmit)="onSubmit()">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="nombre">Nombre</span>
+                <input formControlName="nombre" class="form-control" type="text" name="nombre" id="nombrejugador"
+                    minlength="2">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="apellido">Apellido</span>
+                <input formControlName="apellido" class="form-control" type="text" name="apellido" id="apellidojugador"
+                    minlength="2">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="legajo">Legajo</span>
+                <input formControlName="legajo" class="form-control" type="number" name="legajo" id="legajojugador"
+                    minlength="1">
+            </div>
+            <h5>Seleccione la localidad de su facultad</h5>
+            <div *ngFor="let facultad of facultades" class="form-check">
+                <label [for]="facultad.codigo">
+                    <input [value]="facultad" formControlName="facultad" [id]="facultad.codigo" class="form-check-input"
+                        type="radio" name="facultad">
+                    {{facultad.nombre}}
+                </label>
+            </div>
+            <div class="input-group mb-3">
+                <label class="input-group-text" for="disciplina">Disciplina</label>
+                <select formControlName="disciplina" class="form-select" id="disciplina" name="disciplina" required>
+                    <option selected disabled>Elegir disciplina</option>
+                    <option *ngFor="let d of disciplinas" [ngValue]="d">{{d.nombre}}</option>
+                </select>
+            </div>
+            <div class="input-group mb-3">
+                <label class="input-group-text" for="nacionalidad">Nacionalidad</label>
+                <select formControlName="nacionalidad" class="form-select" id="nacionalidad" name="nacionalidad"
+                    required>
+                    <option selected disabled>Elegir nacionalidad</option>
+                    <option *ngFor="let n of nacionalidades" [ngValue]="n">{{n.nombre}}</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-light">Guardar</button>
+            <button (click)="onVolverInicio()" type="button" class="btn btn-light">Volver a Inicio</button>
+        </form>
+    </div>
+</div>

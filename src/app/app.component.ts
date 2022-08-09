@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'PantallaRegistro';
+  title = 'Pantalla_De_Registro';
+  // myImage:string = "/Pantalla_De_Registro/src/assets/low-poly-grid-haikei.png";
 }

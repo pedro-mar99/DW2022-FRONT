@@ -20,16 +20,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'PantallaRegistro'`, () => {
+  it(`should have as title 'Pantalla_De_Registro'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('PantallaRegistro');
+    expect(app.title).toEqual('Pantalla_De_Registro');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('PantallaRegistro app is running!');
+    expect(compiled.querySelector('.content span')?.textContent).toContain('Pantalla_De_Registro app is running!');
   });
 });
