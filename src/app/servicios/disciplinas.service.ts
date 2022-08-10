@@ -7,9 +7,14 @@ import { environment } from 'src/environments/environment';
 })
 export class DisciplinasService {
 
+
+  
   constructor(private http: HttpClient) { }
   
   getDisciplinas(){
     return this.http.get(environment.apiUrl + '/disciplinas');
+  }
+  eliminarDisciplina(id: number) {
+    return this.http.delete(environment.apiUrl + '/disciplinas/' + id);
   }
 }

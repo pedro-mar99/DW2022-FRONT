@@ -54,7 +54,7 @@ export class JugadoresComponent implements OnInit {
     this.router.navigate(['inicio']);
   }
   editar(id: number) {
-    this.router.navigate([`editar-jugador/${id}`])
+    this.router.navigate([`editar-jugador/${id}`]);
   }
   eliminar(id: number) {
     this.servicioJugadores.eliminarJugador(id).subscribe(res => {
@@ -62,6 +62,6 @@ export class JugadoresComponent implements OnInit {
     });
   }
   filter(){
-    
+
   }
 }

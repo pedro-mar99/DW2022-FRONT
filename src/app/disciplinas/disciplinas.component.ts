@@ -24,6 +24,17 @@ export class DisciplinasComponent implements OnInit {
   onVolverInicio(){
     this.router.navigate(['inicio']);
   }
-  editar(id: number){}
-  eliminar(id: number){}
+  editar(id: number) {
+    this.router.navigate([`editar-disciplina/${id}`])
+  }
+  eliminar(id: number) {
+    try {
+      this.servicioDisciplinas.eliminarDisciplina(id).subscribe(res => {
+        window.location.reload();
+      });
+    } catch (error) {
+      console.log("ENTRO AL TRY")
+    }
+  }
+  
 }

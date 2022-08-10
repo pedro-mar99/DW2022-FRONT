@@ -16,6 +16,7 @@ const routes: Routes = [
   {path: 'nuevo-jugador', component:NuevoJugadorComponent},
   {path: 'editar-jugador/:id', component:NuevoJugadorComponent},
   {path: 'nueva-disciplina', component:NuevaDisciplinaComponent},
+  {path: 'editar-disciplina/:id', component:NuevaDisciplinaComponent},
   {path: 'nueva-nacionalidad', component:NuevaNacionalidadComponent},
   {path: 'disciplinas', component:DisciplinasComponent},
   {path: 'nacionalidades', component:NacionalidadesComponent},
