@@ -1,0 +1,36 @@
+.fondoGrande{
+    position: fixed; 
+    background-size: cover;
+    /* object-fit: contain; */
+    top: 0; 
+    left: 0; 
+  
+    /* Preserve aspet ratio */
+    min-width: 100%;
+    min-height: 100%;
+
+    /* background-image: url('/assets/low-poly-grid-haikei.svg'); */
+    background-image: url('/assets/slider-1-2.jpg');
+}
+.fondo {
+    background-color: rgba(174, 174, 174, 0.793);
+    margin-top: 50px;
+    padding-top: 15px;
+    padding-bottom: 1px;
+    width:75%;
+    height: 50%;
+}
+.input-group-text {
+    width: 150px;
+}
+.form-check {
+    margin-top: 1px;
+    margin-bottom: 10px;
+}
+.h5{
+    text-align: left;
+}
+.btn{
+    margin-bottom : 10px;
+    margin-right: 10px;
+}

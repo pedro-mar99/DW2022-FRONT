@@ -1,1 +1,14 @@
-<p>nueva-disciplina works!</p>
+<div class="fondoGrande">
+    <div class="container fondo">
+        <h2>Nueva Disciplina</h2>
+        <form [formGroup]='registroForm' (ngSubmit)="onSubmit()">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="nombre">Nombre</span>
+                <input formControlName="nombre" class="form-control" type="text" name="nombre" id="nombredisciplina"
+                    minlength="2">
+            </div>
+            <button type="submit" class="btn btn-light">Guardar</button>
+            <button (click)="onVolverInicio()" type="button" class="btn btn-light">Volver a Inicio</button>
+        </form>
+    </div>
+</div>

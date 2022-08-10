@@ -23,6 +23,20 @@ export class NacionalidadesComponent implements OnInit {
   onVolverInicio(){
     this.router.navigate(['inicio']);
   }
-  editar(id: number){}
-  eliminar(id: number){}
+  editar(id: number) {
+    this.router.navigate([`editar-disciplina/${id}`])
+  }
+  eliminar(id: number) {
+    this.servicioNacionalidades.eliminarNacionalidad(id).subscribe(
+      {next: (res)=> {
+        window.location.reload();
+      },
+    error: (e) => {
+      console.log(e)
+      alert("La disciplina no se puede eliminar");
+    }
+    }
+
+    );
+  }
 }

@@ -28,13 +28,17 @@ export class DisciplinasComponent implements OnInit {
     this.router.navigate([`editar-disciplina/${id}`])
   }
   eliminar(id: number) {
-    try {
-      this.servicioDisciplinas.eliminarDisciplina(id).subscribe(res => {
+    this.servicioDisciplinas.eliminarDisciplina(id).subscribe(
+      {next: (res)=> {
         window.location.reload();
-      });
-    } catch (error) {
-      console.log("ENTRO AL TRY")
+      },
+    error: (e) => {
+      console.log(e)
+      alert("La disciplina no se puede eliminar");
     }
+    }
+
+    );
   }
   
 }

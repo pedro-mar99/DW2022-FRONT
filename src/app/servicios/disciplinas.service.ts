@@ -14,7 +14,17 @@ export class DisciplinasService {
   getDisciplinas(){
     return this.http.get(environment.apiUrl + '/disciplinas');
   }
-  eliminarDisciplina(id: number) {
+  getDisciplina(id: number) {
+    return this.http.get(environment.apiUrl + '/disciplinas/' + id)
+  }
+  newDisciplina(disciplina: any){
+    return this.http.post(environment.apiUrl + '/disciplinas', disciplina)
+  }
+  editDisciplina(disciplina: any, id: any) {
+    disciplina.id = id;
+    return this.http.put(environment.apiUrl + '/disciplinas', disciplina)
+  }
+  eliminarDisciplina(id: number){
     return this.http.delete(environment.apiUrl + '/disciplinas/' + id);
   }
 }
