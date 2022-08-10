@@ -20,6 +20,7 @@ export class NuevoJugadorComponent implements OnInit {
   facultades: any;
   roles: any;
   mode: string | undefined;
+  jugadorId: any;
   registroForm = this.fb.group({
     nombre: ['', [Validators.required, Validators.minLength(3)]],
     apellido: ['', [Validators.required, Validators.minLength(3)]],
@@ -66,7 +67,7 @@ export class NuevoJugadorComponent implements OnInit {
     });
   }
   saveJugador(){
-    this.servicioJugadores.editJugador(this.registroForm.value).subscribe((rta) => {
+    this.servicioJugadores.editJugador(this.registroForm.value, this.jugadorId).subscribe((rta) => {
       console.log("Success", rta);
     });
   }
@@ -75,8 +76,8 @@ export class NuevoJugadorComponent implements OnInit {
   }
 
   setFormData(){
-    const id = this.route.snapshot.params['id'];
-    this.servicioJugadores.getJugador(id).subscribe(rta =>{
+    this.jugadorId = this.route.snapshot.paramMap.get('id');
+    this.servicioJugadores.getJugador(this.jugadorId).subscribe(rta =>{
       const jugador: any = rta
       this.registroForm.patchValue(rta)
       this.registroForm.get('facultad')?.setValue(

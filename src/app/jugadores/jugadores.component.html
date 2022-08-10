@@ -2,34 +2,40 @@
   <h1>Jugadores</h1>
 </header>
 <!-- <label>Filtro: </label> -->
-<div class="tabla-filtro">
-  <div class="row">
-
-    <div class="col-3 d-flex align-items-center">
-      <label class="me-3">Filtro:</label>
-      <input class="form-control" type="text" placeholder="Ingrese el filtro">
-
+<form [formGroup]="filterForm" (ngSubmit)="filter()"> 
+  <div class="tabla-filtro">
+    <div class="row">
+      <div class="col-3 d-flex align-items-center">
+        <label class="me-3">Filtro:</label>
+        <input formControlName="nombre" class="form-control" type="text" placeholder="Ingrese el filtro">
+      </div>
+  
+      <div class="col-3 d-flex align-items-center">
+        <select  formControlName="facultad" class="form-select" id="disciplina" name="disciplina" required>
+          <option selected disabled>Elegir Facultad</option>
+          <option *ngFor="let facultad of facultades" [value]="facultad">{{facultad.nombre}}</option>
+      </select>
+      </div>
+  
+      <div class="col-3 d-flex align-items-center">
+        <select formControlName="disciplina" class="form-select" id="disciplina" name="disciplina" required>
+          <option selected disabled>Elegir Disciplina</option>
+          <option *ngFor="let disciplina of disciplinas" [value]="disciplina">{{disciplina.nombre}}</option>
+      </select>
+      </div>
+      
+      <div class="col-3 d-flex align-items-center">
+        <select formControlName="nacionalidad" class="form-select" id="nacionalidad" name="nacionalidad" required>
+          <option selected disabled>Elegir Nacionalidad</option>
+          <option *ngFor="let nacionalidad of nacionalidades" [value]="nacionalidad">{{nacionalidad.nombre}}</option>
+      </select>
+      </div>
+  
     </div>
-    <div class="col-3 d-flex align-items-center">
-      <select  class="form-select" id="disciplina" name="disciplina" required>
-        <option selected disabled>Elegir Facultad</option>
-        <option *ngFor="let facultad of facultades" [value]="facultad.codigo">{{facultad.nombre}}</option>
-    </select>
-
-    </div>
-    <div class="col-3 d-flex align-items-center">
-      <select  class="form-select" id="disciplina" name="disciplina" required>
-        <option selected disabled>Elegir Disciplina</option>
-        <option *ngFor="let disciplina of disciplinas" [value]="disciplina.codigo">{{disciplina.nombre}}</option>
-    </select>
-
-    </div>
+    <button type="submit" class="btn btn-success" id="btnFiltrar">Filtrar</button>
+    <button type="button" class="btn btn-danger" id="btnBorrar">Borrar</button>
   </div>
-
-  <button type="button" class="btn btn-success" id="btnFiltrar">Filtrar</button>
-  <button type="button" class="btn btn-danger" id="btnBorrar">Borrar</button>
-
-</div>
+</form>
 <div class="tabla-jugadores">
   <table class="table table-hover">
     <thead>

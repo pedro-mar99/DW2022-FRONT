@@ -43,7 +43,8 @@ export class JugadoresService {
   newJugador(jugador: any) {
     return this.http.post(environment.apiUrl + '/jugadores', jugador)
   }
-  editJugador(jugador: any) {
+  editJugador(jugador: any, id: any) {
+    jugador.id = id;
     return this.http.put(environment.apiUrl + '/jugadores', jugador)
   }
   eliminarJugador(id: number){
