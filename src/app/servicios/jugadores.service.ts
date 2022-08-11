@@ -9,13 +9,14 @@ export class JugadoresService {
   constructor(private http: HttpClient) {}
 
   getJugadores(params: any) {
-    console.log(params);
     return this.http.get(
       `${environment.apiUrl}/jugadores?nombre=${
         params.nombre ? params.nombre : ''
       }&facultad=${params.facultad ? params.facultad.nombre : ''}&disciplina=${
         params.disciplina ? params.disciplina.nombre : ''
-      }&nacionalidad=${params.nacionalidad ? params.nacionalidad.nombre : ''}`
+      }&nacionalidad=${
+        params.nacionalidad ? params.nacionalidad.nombre : ''
+      }&page=${params.page? params.page: 0}`
     );
   }
   getJugador(id: number) {

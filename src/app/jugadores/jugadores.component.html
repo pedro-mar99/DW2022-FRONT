@@ -2,38 +2,78 @@
   <h1>Jugadores</h1>
 </header>
 <!-- <label>Filtro: </label> -->
-<form [formGroup]="filterForm" (ngSubmit)="filter()"> 
+<form [formGroup]="filterForm" (ngSubmit)="filter()">
   <div class="tabla-filtro">
     <div class="row">
       <div class="col-3 d-flex align-items-center">
         <label class="me-3">Filtro:</label>
-        <input formControlName="nombre" class="form-control" type="text" placeholder="Ingrese el filtro">
+        <input
+          formControlName="nombre"
+          class="form-control"
+          type="text"
+          placeholder="Ingrese el filtro"
+        />
       </div>
-  
+
       <div class="col-3 d-flex align-items-center">
-        <select  formControlName="facultad" class="form-select" id="disciplina" name="disciplina" required>
+        <select
+          formControlName="facultad"
+          class="form-select"
+          id="disciplina"
+          name="disciplina"
+          required
+        >
           <option selected disabled>Elegir Facultad</option>
-          <option *ngFor="let facultad of facultades" [ngValue]="facultad">{{facultad.nombre}}</option>
-      </select>
+          <option *ngFor="let facultad of facultades" [ngValue]="facultad">
+            {{ facultad.nombre }}
+          </option>
+        </select>
       </div>
-  
+
       <div class="col-3 d-flex align-items-center">
-        <select formControlName="disciplina" class="form-select" id="disciplina" name="disciplina" required>
+        <select
+          formControlName="disciplina"
+          class="form-select"
+          id="disciplina"
+          name="disciplina"
+          required
+        >
           <option selected disabled>Elegir Disciplina</option>
-          <option *ngFor="let disciplina of disciplinas" [ngValue]="disciplina">{{disciplina.nombre}}</option>
-      </select>
+          <option *ngFor="let disciplina of disciplinas" [ngValue]="disciplina">
+            {{ disciplina.nombre }}
+          </option>
+        </select>
       </div>
-      
+
       <div class="col-3 d-flex align-items-center">
-        <select formControlName="nacionalidad" class="form-select" id="nacionalidad" name="nacionalidad" required>
+        <select
+          formControlName="nacionalidad"
+          class="form-select"
+          id="nacionalidad"
+          name="nacionalidad"
+          required
+        >
           <option selected disabled>Elegir Nacionalidad</option>
-          <option *ngFor="let nacionalidad of nacionalidades" [ngValue]="nacionalidad">{{nacionalidad.nombre}}</option>
-      </select>
+          <option
+            *ngFor="let nacionalidad of nacionalidades"
+            [ngValue]="nacionalidad"
+          >
+            {{ nacionalidad.nombre }}
+          </option>
+        </select>
       </div>
-  
     </div>
-    <button type="submit" class="btn btn-success" id="btnFiltrar">Filtrar</button>
-    <button (click)="cleanFilters()" type="button" class="btn btn-danger" id="btnBorrar">Borrar</button>
+    <button type="submit" class="btn btn-success" id="btnFiltrar">
+      Filtrar
+    </button>
+    <button
+      (click)="cleanFilters()"
+      type="button"
+      class="btn btn-danger"
+      id="btnBorrar"
+    >
+      Borrar
+    </button>
   </div>
 </form>
 <div class="tabla-jugadores">
@@ -51,21 +91,44 @@
     </thead>
     <tbody>
       <tr *ngFor="let jugador of jugadores">
-        <td colspan="2">{{jugador.nombre|titlecase}}{{" "+jugador.apellido|titlecase}}</td>
-        <td>{{jugador.legajo}}</td>
-        <td>{{jugador.facultad.codigo|uppercase}}</td>
-        <td>{{jugador.disciplina.nombre|titlecase}}</td>
-        <td>{{jugador.nacionalidad.nombre|titlecase}}</td>
-        <td>{{jugador.rol.nombre|titlecase}}</td>
-        <td> 
-          <button class="btn btn-warning" (click)="editar(jugador.id)" >Editar</button> 
-          <button class="btn btn-danger" (click)="eliminar(jugador.id)" >Eliminar</button> 
+        <td colspan="2">
+          {{ jugador.nombre | titlecase
+          }}{{ " " + jugador.apellido | titlecase }}
+        </td>
+        <td>{{ jugador.legajo }}</td>
+        <td>{{ jugador.facultad.codigo | uppercase }}</td>
+        <td>{{ jugador.disciplina.nombre | titlecase }}</td>
+        <td>{{ jugador.nacionalidad.nombre | titlecase }}</td>
+        <td>{{ jugador.rol.nombre | titlecase }}</td>
+        <td>
+          <button class="btn btn-warning" (click)="editar(jugador.id)">
+            Editar
+          </button>
+          <button
+            class="btn btn-danger"
+            [swal]="{
+              title: '¿Desea eliminar el jugador?',
+              showCancelButton: true,
+              cancelButtonText: 'Cancelar',
+              confirmButtonText: 'Confirmar'
+            }"
+            (confirm)="this.eliminar(jugador.id)"
+          >
+            Eliminar
+          </button>
         </td>
       </tr>
     </tbody>
-
   </table>
 </div>
+<app-paginator
+  [actualPage]="this.actualPage"
+  [totalPages]="this.totalPages"
+  (changePage)="this.changePage($event)"
+>  
+</app-paginator>
 <div class="btn-volver-inicio">
-  <button (click)="onVolverInicio()" type="button" class="btn btn-dark">Volver a Inicio</button>
+  <button (click)="onVolverInicio()" type="button" class="btn btn-dark">
+    Volver a Inicio
+  </button>
 </div>

@@ -1,0 +1,11 @@
+
+.selected-page{
+    background-color: #02337c;
+    border-color: #02337c
+}
+
+.pg{
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}

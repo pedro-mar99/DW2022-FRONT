@@ -1,0 +1,11 @@
+<div class="pg">
+  <button
+    class="btn btn-primary"
+    [class.selected-page]="this.actualPage === i"
+    type="button"
+    (click)="selectPage(i)"
+    *ngFor="let page of this.totalPages; let i = index"
+  >
+    {{ i + 1 }}
+  </button>
+</div>

@@ -13,6 +13,8 @@ import { DisciplinasComponent } from './disciplinas/disciplinas.component';
 import { NacionalidadesComponent } from './nacionalidades/nacionalidades.component';
 import { NuevaNacionalidadComponent } from './nueva-nacionalidad/nueva-nacionalidad.component';
 import { NuevaDisciplinaComponent } from './nueva-disciplina/nueva-disciplina.component';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { PaginatorComponent } from './componentes/paginator/paginator.component';
 
 @NgModule({
   declarations: [
@@ -23,14 +25,16 @@ import { NuevaDisciplinaComponent } from './nueva-disciplina/nueva-disciplina.co
     DisciplinasComponent,
     NacionalidadesComponent,
     NuevaNacionalidadComponent,
-    NuevaDisciplinaComponent
+    NuevaDisciplinaComponent,
+    PaginatorComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SweetAlert2Module.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

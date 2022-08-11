@@ -1,42 +1,66 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NacionalidadesService } from '../servicios/nacionalidades.service';
 
 @Component({
   selector: 'app-nacionalidades',
   templateUrl: './nacionalidades.component.html',
-  styleUrls: ['./nacionalidades.component.css']
+  styleUrls: ['./nacionalidades.component.css'],
 })
 export class NacionalidadesComponent implements OnInit {
   nacionalidades: any;
-
+  totalPages: any;
+  actualPage: any;
+  filterForm = this.fb.group({
+    nombre: [null, [Validators.minLength(3)]],
+    page: 0
+  });
   constructor(
     private router: Router,
     private servicioNacionalidades: NacionalidadesService,
-  ) { }
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
-    this.servicioNacionalidades.getNacionalidades().subscribe(res =>{
-      this.nacionalidades = res
-    })
+    this.getNacionalidades();
   }
-  onVolverInicio(){
+
+  private getNacionalidades() {
+    this.servicioNacionalidades
+      .getNacionalidades(this.filterForm.value)
+      .subscribe((res: any) => {
+        this.nacionalidades = res.content;
+        this.totalPages = Array(res.totalPages).fill(0);
+        this.actualPage  = res.number;
+      });
+  }
+  onVolverInicio() {
     this.router.navigate(['inicio']);
   }
   editar(id: number) {
-    this.router.navigate([`editar-disciplina/${id}`])
+    this.router.navigate([`editar-disciplina/${id}`]);
   }
   eliminar(id: number) {
-    this.servicioNacionalidades.eliminarNacionalidad(id).subscribe(
-      {next: (res)=> {
+    this.servicioNacionalidades.eliminarNacionalidad(id).subscribe({
+      next: (res) => {
         window.location.reload();
       },
-    error: (e) => {
-      console.log(e)
-      alert("La disciplina no se puede eliminar");
-    }
-    }
-
-    );
+      error: (e) => {
+        console.log(e);
+        alert('La disciplina no se puede eliminar');
+      },
+    });
+  }
+  filter() {
+    this.getNacionalidades();
+  }
+  cleanFilters() {
+    this.filterForm.reset();
+    this.filter();
+  }
+  changePage(index:number){
+    this.filterForm.get('page')?.setValue(index);
+    this.getNacionalidades()
   }
 }

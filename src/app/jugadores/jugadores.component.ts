@@ -16,12 +16,14 @@ export class JugadoresComponent implements OnInit {
   disciplinas: any;
   facultades: any;
   nacionalidades: any;
-
+  totalPages: any;
+  actualPage: any;
   filterForm = this.fb.group({
     nombre: [null, [Validators.minLength(3)]],
     facultad: null,
     disciplina: null,
     nacionalidad: null,
+    page: 0,
   });
 
   constructor(
@@ -30,7 +32,7 @@ export class JugadoresComponent implements OnInit {
     private servicioNacionalidades: NacionalidadesService,
     private servicioDisciplinas: DisciplinasService,
     private servicioFacultades: FacultadesService,
-    private fb: FormBuilder,
+    private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
@@ -41,17 +43,21 @@ export class JugadoresComponent implements OnInit {
   }
 
   private getJugadores() {
-    this.servicioJugadores.getJugadores(this.filterForm.value).subscribe((res: any) => {
-      this.jugadores = res.content;
-    });
+    this.servicioJugadores
+      .getJugadores(this.filterForm.value)
+      .subscribe((res: any) => {
+        this.jugadores = res.content;
+        this.totalPages = Array(res.totalPages).fill(4);
+        this.actualPage  = res.number;
+      });
   }
   private getNacionalidades() {
-    this.servicioNacionalidades.getNacionalidades().subscribe((rta) => {
+    this.servicioNacionalidades.getAllNacionalidades().subscribe((rta) => {
       this.nacionalidades = rta;
     });
   }
   private getDisciplinas() {
-    this.servicioDisciplinas.getDisciplinas().subscribe((rta) => {
+    this.servicioDisciplinas.getAllDisciplinas().subscribe((rta) => {
       this.disciplinas = rta;
     });
   }
@@ -72,10 +78,14 @@ export class JugadoresComponent implements OnInit {
     });
   }
   filter() {
-    this.getJugadores()
+    this.getJugadores();
   }
-  cleanFilters(){
+  cleanFilters() {
     this.filterForm.reset();
     this.filter();
+  }
+  changePage(index:number){
+    this.filterForm.get('page')?.setValue(index);
+    this.getJugadores()
   }
 }

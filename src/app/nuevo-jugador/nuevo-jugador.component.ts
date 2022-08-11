@@ -49,12 +49,12 @@ export class NuevoJugadorComponent implements OnInit {
   }
 
   private getNacionalidades() {
-    this.servicioNacionalidades.getNacionalidades().subscribe((rta) => {
+    this.servicioNacionalidades.getAllNacionalidades().subscribe((rta) => {
       this.nacionalidades = rta;
     });
   }
   private getDisciplinas() {
-    this.servicioDisciplinas.getDisciplinas().subscribe((rta) => {
+    this.servicioDisciplinas.getAllDisciplinas().subscribe((rta) => {
       this.disciplinas = rta;
     });
   }
@@ -71,14 +71,14 @@ export class NuevoJugadorComponent implements OnInit {
     this.servicioJugadores
       .newJugador(this.registroForm.value)
       .subscribe((rta) => {
-        console.log('Success', rta);
+        window.location.reload();
       });
   }
   saveJugador() {
     this.servicioJugadores
       .editJugador(this.registroForm.value, this.jugadorId)
       .subscribe((rta) => {
-        console.log('Success', rta);
+        this.router.navigate(['/jugadores']);
       });
   }
   onVolverInicio() {
