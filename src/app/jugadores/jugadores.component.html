@@ -13,27 +13,27 @@
       <div class="col-3 d-flex align-items-center">
         <select  formControlName="facultad" class="form-select" id="disciplina" name="disciplina" required>
           <option selected disabled>Elegir Facultad</option>
-          <option *ngFor="let facultad of facultades" [value]="facultad">{{facultad.nombre}}</option>
+          <option *ngFor="let facultad of facultades" [ngValue]="facultad">{{facultad.nombre}}</option>
       </select>
       </div>
   
       <div class="col-3 d-flex align-items-center">
         <select formControlName="disciplina" class="form-select" id="disciplina" name="disciplina" required>
           <option selected disabled>Elegir Disciplina</option>
-          <option *ngFor="let disciplina of disciplinas" [value]="disciplina">{{disciplina.nombre}}</option>
+          <option *ngFor="let disciplina of disciplinas" [ngValue]="disciplina">{{disciplina.nombre}}</option>
       </select>
       </div>
       
       <div class="col-3 d-flex align-items-center">
         <select formControlName="nacionalidad" class="form-select" id="nacionalidad" name="nacionalidad" required>
           <option selected disabled>Elegir Nacionalidad</option>
-          <option *ngFor="let nacionalidad of nacionalidades" [value]="nacionalidad">{{nacionalidad.nombre}}</option>
+          <option *ngFor="let nacionalidad of nacionalidades" [ngValue]="nacionalidad">{{nacionalidad.nombre}}</option>
       </select>
       </div>
   
     </div>
     <button type="submit" class="btn btn-success" id="btnFiltrar">Filtrar</button>
-    <button type="button" class="btn btn-danger" id="btnBorrar">Borrar</button>
+    <button (click)="cleanFilters()" type="button" class="btn btn-danger" id="btnBorrar">Borrar</button>
   </div>
 </form>
 <div class="tabla-jugadores">

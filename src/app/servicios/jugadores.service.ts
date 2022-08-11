@@ -1,55 +1,34 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-// import { url } from 'inspector';
 import { environment } from 'src/environments/environment';
-import { Jugador } from '../dominio/jugador';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class JugadoresService {
-  private _jugadores: [{
-    nombre: string,
-    apellido: string,
-    dni: number,
-    fechaNacimiento: string,
-    facultad: object,
-    disciplina: object,
-    nacionalidad: string,
-  }] = [{
-    nombre: 'Matias',
-    apellido: 'Cassani',
-    dni: 1234567,
-    fechaNacimiento: "12-12-1212",
-    facultad: { codigo: 'VMA', nombre: 'Villa María' },
-    disciplina: { codigo: 'FTB', nombre: 'Fútbol' },
-    nacionalidad: 'Argentina',
-  }];
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
-  get jugadores() {
-    return this._jugadores;
-  }
-  agregarNuevoJugador(jugador: any) {
-    this._jugadores.push(jugador);
-  }
-  getJugadores() {
-    return this.http.get(environment.apiUrl + '/jugadores')
+  getJugadores(params: any) {
+    console.log(params);
+    return this.http.get(
+      `${environment.apiUrl}/jugadores?nombre=${
+        params.nombre ? params.nombre : ''
+      }&facultad=${params.facultad ? params.facultad.nombre : ''}&disciplina=${
+        params.disciplina ? params.disciplina.nombre : ''
+      }&nacionalidad=${params.nacionalidad ? params.nacionalidad.nombre : ''}`
+    );
   }
   getJugador(id: number) {
-    return this.http.get(environment.apiUrl + '/jugadores/' + id)
+    return this.http.get(environment.apiUrl + '/jugadores/' + id);
   }
   newJugador(jugador: any) {
-    return this.http.post(environment.apiUrl + '/jugadores', jugador)
+    return this.http.post(environment.apiUrl + '/jugadores', jugador);
   }
   editJugador(jugador: any, id: any) {
     jugador.id = id;
-    return this.http.put(environment.apiUrl + '/jugadores', jugador)
+    return this.http.put(environment.apiUrl + '/jugadores', jugador);
   }
-  eliminarJugador(id: number){
+  eliminarJugador(id: number) {
     return this.http.delete(environment.apiUrl + '/jugadores/' + id);
   }
-  
-
 }

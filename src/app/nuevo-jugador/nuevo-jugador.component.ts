@@ -7,14 +7,12 @@ import { JugadoresService } from '../servicios/jugadores.service';
 import { FacultadesService } from '../servicios/facultades.service';
 import { RolesService } from '../servicios/roles.service';
 
-
 @Component({
   selector: 'app-nuevo-jugador',
   templateUrl: './nuevo-jugador.component.html',
-  styleUrls: ['./nuevo-jugador.component.css']
+  styleUrls: ['./nuevo-jugador.component.css'],
 })
 export class NuevoJugadorComponent implements OnInit {
-
   nacionalidades: any;
   disciplinas: any;
   facultades: any;
@@ -38,63 +36,81 @@ export class NuevoJugadorComponent implements OnInit {
     private servicioJugadores: JugadoresService,
     private servicioFacultades: FacultadesService,
     private route: ActivatedRoute
-  ) { }
+  ) {}
 
   ngOnInit(): void {
+    this.getNacionalidades();
+    this.getDisciplinas();
+    this.getFacultades();
+    this.setMode();
+    if (this.isEditMode()) {
+      this.setFormData();
+    }
+  }
+
+  private getNacionalidades() {
     this.servicioNacionalidades.getNacionalidades().subscribe((rta) => {
       this.nacionalidades = rta;
     });
+  }
+  private getDisciplinas() {
     this.servicioDisciplinas.getDisciplinas().subscribe((rta) => {
       this.disciplinas = rta;
     });
+  }
+  private getFacultades() {
     this.servicioFacultades.getFacultades().subscribe((rta) => {
       this.facultades = rta;
     });
-    
-    this.setMode();
-    
-    if(this.isEditMode()){
-      this.setFormData()
-    } 
   }
 
   onSubmit() {
-    return this.mode === 'edit'? this.saveJugador(): this.createJugador()
+    return this.mode === 'edit' ? this.saveJugador() : this.createJugador();
   }
-  createJugador(){
-    this.servicioJugadores.newJugador(this.registroForm.value).subscribe((rta) => {
-      console.log("Success", rta);
-    });
+  createJugador() {
+    this.servicioJugadores
+      .newJugador(this.registroForm.value)
+      .subscribe((rta) => {
+        console.log('Success', rta);
+      });
   }
-  saveJugador(){
-    this.servicioJugadores.editJugador(this.registroForm.value, this.jugadorId).subscribe((rta) => {
-      console.log("Success", rta);
-    });
+  saveJugador() {
+    this.servicioJugadores
+      .editJugador(this.registroForm.value, this.jugadorId)
+      .subscribe((rta) => {
+        console.log('Success', rta);
+      });
   }
   onVolverInicio() {
     this.router.navigate(['inicio']);
   }
 
-  setFormData(){
+  setFormData() {
     this.jugadorId = this.route.snapshot.paramMap.get('id');
-    this.servicioJugadores.getJugador(this.jugadorId).subscribe(rta =>{
-      const jugador: any = rta
-      this.registroForm.patchValue(rta)
-      this.registroForm.get('facultad')?.setValue(
-        this.facultades.find((f: any) => f.id === jugador.facultad.id)
-      )
-      this.registroForm.get('disciplina')?.setValue(
-        this.disciplinas.find((d: any) => d.id === jugador.disciplina.id)
-      )
-      this.registroForm.get('nacionalidad')?.setValue(
-        this.nacionalidades.find((d: any) => d.id === jugador.nacionalidad.id)
-      )
+    this.servicioJugadores.getJugador(this.jugadorId).subscribe((rta) => {
+      const jugador: any = rta;
+      this.registroForm.patchValue(rta);
+      this.registroForm
+        .get('facultad')
+        ?.setValue(
+          this.facultades.find((f: any) => f.id === jugador.facultad.id)
+        );
+      this.registroForm
+        .get('disciplina')
+        ?.setValue(
+          this.disciplinas.find((d: any) => d.id === jugador.disciplina.id)
+        );
+      this.registroForm
+        .get('nacionalidad')
+        ?.setValue(
+          this.nacionalidades.find((d: any) => d.id === jugador.nacionalidad.id)
+        );
     });
   }
-  isEditMode(){
+  isEditMode() {
     return this.mode === 'edit';
   }
-  setMode(){
-    this.mode = this.route.snapshot.params['id']?'edit':'create';
+  setMode() {
+    this.mode = this.route.snapshot.params['id'] ? 'edit' : 'create';
   }
 }
