@@ -39,7 +39,7 @@ export class NacionalidadesComponent implements OnInit {
     this.router.navigate(['inicio']);
   }
   editar(id: number) {
-    this.router.navigate([`editar-disciplina/${id}`]);
+    this.router.navigate([`editar-nacionalidad/${id}`]);
   }
   eliminar(id: number) {
     this.servicioNacionalidades.eliminarNacionalidad(id).subscribe({
