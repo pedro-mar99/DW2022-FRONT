@@ -26,7 +26,7 @@
           name="facultad"
           required
         >
-          <option selected disabled>Elegir Facultad</option>
+          <option [ngValue]="null" [disabled]="true" [hidden]="true">Elegir Facultad</option>
           <option *ngFor="let facultad of facultades" [ngValue]="facultad">
             {{ facultad.nombre }}
           </option>
@@ -41,14 +41,14 @@
           name="disciplina"
           required
         >
-          <option selected disabled>Elegir Disciplina</option>
+          <option [ngValue]="null" [disabled]="true" [hidden]="true">Elegir Disciplina</option>
           <option *ngFor="let disciplina of disciplinas" [ngValue]="disciplina">
             {{ disciplina.nombre }}
           </option>
         </select>
       </div>
 
-      <div class="col-1 d-flex align-items-center">
+      <div class="col-2 d-flex align-items-center">
         <select
           formControlName="nacionalidad"
           class="form-select"
@@ -56,7 +56,7 @@
           name="nacionalidad"
           required
         >
-          <option selected disabled>Elegir Nacionalidad</option>
+          <option [ngValue]="null" [disabled]="true" [hidden]="true">Elegir Nacionalidad</option>
           <option
             *ngFor="let nacionalidad of nacionalidades"
             [ngValue]="nacionalidad"
@@ -64,6 +64,9 @@
             {{ nacionalidad.nombre }}
           </option>
         </select>
+      </div>
+
+      <div class="col-1 d-flex align-items-center">
         <button type="submit" class="btn btn-success" id="btnFiltrar">
           Filtrar
         </button>

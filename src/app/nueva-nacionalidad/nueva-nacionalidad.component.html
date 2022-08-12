@@ -12,7 +12,18 @@
                 <input formControlName="nombre" class="form-control" type="text" name="nombre" id="nombrenacionalidad"
                     minlength="2">
             </div>
-            <button type="submit"  class="btn btn-light btn-outline-success">Guardar</button>
+            <button 
+                type="submit" 
+                class="btn btn-light btn-outline-success"
+                [swal]="{
+                    title: '¿Desea guardar la nacionalidad?',
+                    showCancelButton: true,
+                    cancelButtonText: 'Cancelar',
+                    confirmButtonText: 'Confirmar'
+                  }"
+                  [disabled]="!this.registroForm.valid"
+                  (confirm)="this.onSubmit()">Guardar
+            </button>
         </form>
     </div>
 </div>

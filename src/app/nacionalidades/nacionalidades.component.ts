@@ -13,7 +13,7 @@ export class NacionalidadesComponent implements OnInit {
   totalPages: any;
   actualPage: any;
   filterForm = this.fb.group({
-    nombre: [null, [Validators.minLength(3)]],
+    nombre: ['', [Validators.required, Validators.minLength(3)]],
     page: 0
   });
   constructor(

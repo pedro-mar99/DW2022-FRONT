@@ -6,7 +6,7 @@
 <div class="fondoGrande">
   <div class="container fondo">
     <h2>Inscripción</h2>
-    <form [formGroup]="registroForm">
+    <form [formGroup]="registroForm" (ngSubmit)="onSubmit()">
       <div class="input-group mb-3">
         <span class="input-group-text" id="nombre">Nombre</span>
         <input
@@ -16,6 +16,7 @@
           name="nombre"
           id="nombrejugador"
           minlength="2"
+          [ngClass]="{'is-invalid': submitted}"
         />
       </div>
       <div class="input-group mb-3">
@@ -93,7 +94,7 @@
         }"
         [disabled]="!this.registroForm.valid"
         (confirm)="this.onSubmit()"
-        class="btn btn-success"
+        class="btn btn-light btn-outline-success"
       >
         Guardar
       </button>

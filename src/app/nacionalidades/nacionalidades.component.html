@@ -17,17 +17,19 @@
           placeholder="Ingrese la nacionalidad"
           formControlName="nombre"
         />
-        <button type="submit" class="btn btn-success" id="btnFiltrar">
-          Filtrar
-        </button>
-        <button
-          type="button"
-          (click)="this.cleanFilters()"
-          class="btn btn-danger"
-          id="btnBorrar"
-        >
-          Borrar
-        </button>
+        <div class="col-1 d-flex align-items-center">
+          <button type="submit" class="btn btn-success" id="btnFiltrar">
+            Filtrar
+          </button>
+          <button
+            type="button"
+            (click)="this.cleanFilters()"
+            class="btn btn-danger"
+            id="btnBorrar"
+          >
+            Borrar
+          </button>
+        </div>
       </div>
     </div>
   </div>

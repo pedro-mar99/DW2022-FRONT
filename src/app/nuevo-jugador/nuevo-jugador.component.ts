@@ -19,6 +19,10 @@ export class NuevoJugadorComponent implements OnInit {
   roles: any;
   mode: string | undefined;
   jugadorId: any;
+
+  //Elian
+  submitted = false;
+
   registroForm = this.fb.group({
     nombre: ['', [Validators.required, Validators.minLength(3)]],
     apellido: ['', [Validators.required, Validators.minLength(3)]],
@@ -42,10 +46,6 @@ export class NuevoJugadorComponent implements OnInit {
     this.getNacionalidades();
     this.getDisciplinas();
     this.getFacultades();
-    this.setMode();
-    if (this.isEditMode()) {
-      this.setFormData();
-    }
   }
 
   private getNacionalidades() {
@@ -61,10 +61,19 @@ export class NuevoJugadorComponent implements OnInit {
   private getFacultades() {
     this.servicioFacultades.getFacultades().subscribe((rta) => {
       this.facultades = rta;
+      this.setMode();
+    if (this.isEditMode()) {
+      this.setFormData();
+    }
     });
   }
 
   onSubmit() {
+    //Elian
+    this.submitted = true;
+    if (this.registroForm.invalid) {
+      return 
+    }
     return this.mode === 'edit' ? this.saveJugador() : this.createJugador();
   }
   createJugador() {

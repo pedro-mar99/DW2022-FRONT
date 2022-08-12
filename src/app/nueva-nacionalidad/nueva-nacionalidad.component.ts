@@ -15,7 +15,7 @@ export class NuevaNacionalidadComponent implements OnInit {
   nacionalidadId: any;
 
   registroForm = this.fb.group({
-    nombre: ['', Validators.minLength(3)]
+    nombre: ['', [Validators.required, Validators.minLength(3)]]
   });
 
   constructor(
