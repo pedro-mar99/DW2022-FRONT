@@ -39,6 +39,7 @@ export class NuevaDisciplinaComponent implements OnInit {
   createJugador() {
     this.servicioDisciplinas.newDisciplina(this.registroForm.value).subscribe((rta) => {
       console.log("Success", rta);
+      window.location.reload();
     });
   }
   saveDisciplina() {

@@ -11,6 +11,13 @@
                 <span class="input-group-text" id="nombre">Nombre</span>
                 <input formControlName="nombre" class="form-control" type="text" name="nombre" id="nombrenacionalidad"
                     minlength="2">
+                <div class="form-error">
+                    <label
+                        class="form-error__label"
+                        *ngIf="registroForm.get('nombre')?.invalid && (registroForm.get('nombre')?.dirty || registroForm.get('nombre')?.touched)">
+                        El nombre es invalido, ingresar mas de 3 caracteres.
+                    </label>
+                    </div>
             </div>
             <button 
                 type="submit" 

@@ -20,8 +20,6 @@ export class NuevoJugadorComponent implements OnInit {
   mode: string | undefined;
   jugadorId: any;
 
-  //Elian
-  submitted = false;
 
   registroForm = this.fb.group({
     nombre: ['', [Validators.required, Validators.minLength(3)]],
@@ -69,11 +67,6 @@ export class NuevoJugadorComponent implements OnInit {
   }
 
   onSubmit() {
-    //Elian
-    this.submitted = true;
-    if (this.registroForm.invalid) {
-      return 
-    }
     return this.mode === 'edit' ? this.saveJugador() : this.createJugador();
   }
   createJugador() {
@@ -92,6 +85,12 @@ export class NuevoJugadorComponent implements OnInit {
   }
   onVolverInicio() {
     this.router.navigate(['inicio']);
+  }
+  onNuevaDisciplina() {
+    this.router.navigate(['/nueva-disciplina']);
+  }
+  onNuevaNacionalidad() {
+    this.router.navigate(['/nueva-nacionalidad']);
   }
 
   setFormData() {

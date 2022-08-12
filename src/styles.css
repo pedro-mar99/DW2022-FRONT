@@ -1,1 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+.form-error__label{
+    color: rgb(123, 31, 31);
+    font-weight: bold;
+    font-size: 12px;
+}
+.form-error{
+    width: 100%;
+}

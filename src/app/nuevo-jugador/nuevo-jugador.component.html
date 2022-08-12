@@ -1,101 +1,85 @@
-<div class="btn-volver-inicio" >
-  <button (click)="onVolverInicio()" type="button" class="btn">
+<div class="btn-volver-inicio">
+  <button (click)="onVolverInicio()" type="button" class="btn btn-return">
     <img src="/assets/icons/arrow-back.svg" width="32" height="32">
   </button>
 </div>
 <div class="fondoGrande">
   <div class="container fondo">
     <h2>Inscripción</h2>
-    <form [formGroup]="registroForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="registroForm">
       <div class="input-group mb-3">
         <span class="input-group-text" id="nombre">Nombre</span>
-        <input
-          formControlName="nombre"
-          class="form-control"
-          type="text"
-          name="nombre"
-          id="nombrejugador"
-          minlength="2"
-          [ngClass]="{'is-invalid': submitted}"
-        />
-      </div>
+        <input formControlName="nombre" class="form-control" type="text" name="nombre" id="nombrejugador"
+          minlength="2" />
+          <div class="form-error">
+            <label
+              class="form-error__label"
+              *ngIf="registroForm.get('nombre')?.invalid && (registroForm.get('nombre')?.dirty || registroForm.get('nombre')?.touched)">
+              El nombre es invalido, ingresar mas de 3 caracteres. Campo requerido
+            </label>
+          </div>
+        </div>
       <div class="input-group mb-3">
         <span class="input-group-text" id="apellido">Apellido</span>
-        <input
-          formControlName="apellido"
-          class="form-control"
-          type="text"
-          name="apellido"
-          id="apellidojugador"
-          minlength="2"
-        />
+        <input formControlName="apellido" class="form-control" type="text" name="apellido" id="apellidojugador"
+          minlength="2" />
+          <div class="form-error">
+            <label
+              class="form-error__label"
+              *ngIf="registroForm.get('apellido')?.invalid && (registroForm.get('apellido')?.dirty || registroForm.get('apellido')?.touched)">
+              El apellido es invalido, ingresar mas de 3 caracteres. Campo requerido
+            </label>
+          </div>
       </div>
       <div class="input-group mb-3">
         <span class="input-group-text" id="legajo">Legajo</span>
-        <input
-          formControlName="legajo"
-          class="form-control"
-          type="number"
-          name="legajo"
-          id="legajojugador"
-          min="0"
-        />
+        <input formControlName="legajo" class="form-control" type="number" name="legajo" id="legajojugador" min="0" pattern="[0-9]+"/>
+        <div class="form-error">
+          <label
+            class="form-error__label"
+            *ngIf="registroForm.get('legajo')?.invalid && (registroForm.get('legajo')?.dirty || registroForm.get('legajo')?.touched)">
+            El legajo es invalido, ingresar solo números. Campo requerido
+          </label>
+        </div>
       </div>
       <h5>Seleccione la localidad de su facultad</h5>
       <div *ngFor="let facultad of facultades" class="form-check">
         <label [for]="facultad.codigo">
-          <input
-            [value]="facultad"
-            formControlName="facultad"
-            [id]="facultad.codigo"
-            class="form-check-input"
-            type="radio"
-            name="facultad"
-          />
+          <input [value]="facultad" formControlName="facultad" [id]="facultad.codigo" class="form-check-input"
+            type="radio" name="facultad" />
           {{ facultad.nombre }}
         </label>
       </div>
       <div class="input-group mb-3">
         <label class="input-group-text" for="disciplina">Disciplina</label>
-        <select
-          formControlName="disciplina"
-          class="form-select"
-          id="disciplina"
-          name="disciplina"
-          required
-        >
+        <select formControlName="disciplina" class="form-select" id="disciplina" name="disciplina" required>
           <option selected disabled>Elegir disciplina</option>
           <option *ngFor="let d of disciplinas" [ngValue]="d">
             {{ d.nombre }}
           </option>
         </select>
+          <button (click)="onNuevaDisciplina()" type="button" class="btn btn-add">
+            <img src="/assets/icons/plus.svg" width="32" height="32">
+          </button>
       </div>
       <div class="input-group mb-3">
         <label class="input-group-text" for="nacionalidad">Nacionalidad</label>
-        <select
-          formControlName="nacionalidad"
-          class="form-select"
-          id="nacionalidad"
-          name="nacionalidad"
-          required
-        >
+        <select formControlName="nacionalidad" class="form-select" id="nacionalidad" name="nacionalidad" required>
           <option selected disabled>Elegir nacionalidad</option>
           <option *ngFor="let n of nacionalidades" [ngValue]="n">
             {{ n.nombre }}
           </option>
         </select>
+        <button (click)="onNuevaNacionalidad()" type="button" class=" btn btn-add">
+          <img src="/assets/icons/plus.svg" width="32" height="32">
+        </button>
       </div>
-      <button
-        [swal]="{
+      <button [swal]="{
           title: '¿Desea guardar el jugador?',
           showCancelButton: true,
           cancelButtonText: 'Cancelar',
           confirmButtonText: 'Confirmar'
-        }"
-        [disabled]="!this.registroForm.valid"
-        (confirm)="this.onSubmit()"
-        class="btn btn-light btn-outline-success"
-      >
+        }" [disabled]="!this.registroForm.valid" (confirm)="this.onSubmit()" class="btn btn-light btn-outline-success">
         Guardar
       </button>
     </form>

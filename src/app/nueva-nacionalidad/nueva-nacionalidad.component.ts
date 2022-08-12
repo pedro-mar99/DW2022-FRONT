@@ -38,6 +38,7 @@ export class NuevaNacionalidadComponent implements OnInit {
     createNacionalidad() {
       this.servicioNacionalidades.newNacionalidad(this.registroForm.value).subscribe((rta) => {
         console.log("Success", rta);
+        window.location.reload();
       });
     }
     saveNacionalidad() {
