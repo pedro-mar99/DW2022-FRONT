@@ -1,9 +1,34 @@
-#footer{
+#footer {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
 }
-button{
+
+button {
     margin: 10px;
+}
+
+.fondoGrande{
+    position: fixed; 
+    background-size: cover;
+    /* object-fit: contain; */
+    top: 0; 
+    left: 0; 
+  
+    /* Preserve aspet ratio */
+    min-width: 100%;
+    min-height: 100%;
+
+    /* background-image: url('/assets/low-poly-grid-haikei.svg'); */
+    background-image: url('/assets/historia_nuestra_facultad.jpg');
+}
+
+.ft{
+    background-color: rgba(0, 0, 0, 0.4);
+    color:white;
+}
+.fondo-header{
+    background: rgb(63,94,251);
+    background: linear-gradient(0deg, rgba(63,94,251,0) 0%, rgba(174, 174, 174, 0.9) 40%);
 }
